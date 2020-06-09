@@ -4,6 +4,7 @@ import Login from '../Components/auth/Login';
 import Register from '../Components/auth/Register';
 import Home from '../Components/home/Home';
 import Explore from '../Components/explore/Explore';
+import Comment from '../Components/comment/Comment'
 class RedirectUrl extends Component {
     render() {
         return (
@@ -12,6 +13,7 @@ class RedirectUrl extends Component {
                 <Route exact path='/signup' component={Register}/>
                 <Route exact path='/home' component={Home}/>
                 <Route exact path='/explore' component={Explore}/>
+                <Route exact path='/comment' component={Comment}/>
             </div>
         );
     }

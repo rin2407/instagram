@@ -25,7 +25,25 @@ const useStyles = makeStyles({
 
 export default function ExploreItem(props) {
   const classes = useStyles();
-
+  const [state,setState] = React.useState({
+       hover: false
+  });
+  const Hover= () =>{
+      setState({...state,hover:true});
+  }
+  const NoHover= () =>{
+       setState({...state,hover:false})
+  }
+  const show = ()=>{
+    if(state.hover===true){
+      return(
+        <Typography className={classes.second} >
+        <FavoriteBorderIcon/> {props.favB}
+        <ChatBubbleOutlineIcon className={classes.chat}/> {props.chatB}
+        </Typography>
+      )
+    }
+  }
   return (
         <Grid item xs={12} sm={4}>
           <Card className={classes.root}>
@@ -34,12 +52,11 @@ export default function ExploreItem(props) {
                 component="img"
                 alt="Contemplative Reptile"
                 image={props.image}
+                onMouseOver={Hover}
+                onMouseOut={NoHover}
               />
             </CardActionArea>
-            <Typography className={classes.second} >
-                 <FavoriteBorderIcon/> {props.favB}
-                 <ChatBubbleOutlineIcon className={classes.chat}/> {props.chatB}
-            </Typography>
+               {show()}
           </Card>
         </Grid>  
   );
