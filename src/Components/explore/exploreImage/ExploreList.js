@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: 20,
   },
+  item: {
+    width:'100%'
+  },
 }));
 function ExploreList() {
   var classes = useStyles();
@@ -42,15 +45,17 @@ function ExploreList() {
     },
   ];
   return (
-    <div className={classes.root}>
-      <Container>
+      <Container className={classes.root}>
         <Grid container spacing={3} >
           {arr.map((element, key) => {
-            return <ExploreItem image={element.image} favB={element.favB} chatB={element.chatB} key={key} />;
+            return (
+              <Grid item xs={12} sm={4} className={classes.item} key={key}>
+                <ExploreItem image={element.image} favB={element.favB} chatB={element.chatB}  />
+              </Grid>
+            )
           })}
         </Grid>
       </Container>
-    </div>
   );
 }
 

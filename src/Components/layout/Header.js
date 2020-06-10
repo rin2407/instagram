@@ -40,7 +40,7 @@ function Header(props) {
     <div>
       <AppBar className={classes.AppBar} >
         <Toolbar>
-                <Grid item xs={1} sm={1} onClick={home} className={classes.pointer}>
+                <Grid item xs={12} sm={1} onClick={home} className={classes.pointer}>
                 <CardMedia
                  component="img"
                  image="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
@@ -71,10 +71,10 @@ function Header(props) {
             />
           </Typography>
           <NavLink to="/home" className="list-group-item"> <IconButton><HomeIcon /></IconButton> </NavLink>
-          <NavLink to="/ffhh" className="list-group-item "> <IconButton><NearMeSharpIcon/></IconButton> </NavLink>
+          <NavLink to="/direct/inbox" className="list-group-item "> <IconButton><NearMeSharpIcon/></IconButton> </NavLink>
           <NavLink to="/explore" className="list-group-item "> <IconButton><ExploreIcon /></IconButton> </NavLink>
-          <NavLink to="/gjjj" className="list-group-item "> <IconButton><FavoriteBorderSharpIcon/></IconButton> </NavLink>
-          <NavLink to="/jkjlll" className="list-group-item ">
+          <NavLink to="/ghghhgg" className="list-group-item "> <IconButton><FavoriteBorderSharpIcon/></IconButton> </NavLink>
+          <NavLink to="/me" className="list-group-item ">
           <IconButton>
           <Avatar
               className={classes.Avatar}
