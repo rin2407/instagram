@@ -100,7 +100,7 @@ export default function CardItem(props) {
         <CardContent>
           <Typography> {props.total_like} like</Typography>
           <Typography>{props.name} belike</Typography>
-          <Link to="/" className={classes.comment}>See all {props.total_comment} comments</Link>
+          <Link to="/comment" className={classes.comment}>See all {props.total_comment} comments</Link>
         </CardContent>
         <Divider/>
             <Comment/>

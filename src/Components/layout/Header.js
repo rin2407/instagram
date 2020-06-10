@@ -1,8 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router";
+import {NavLink } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, IconButton, Typography,CardMedia, Grid } from "@material-ui/core";
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import { AppBar, Toolbar, IconButton, Typography,CardMedia, Grid, Avatar } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import ExploreIcon from "@material-ui/icons/Explore";
 import FavoriteBorderSharpIcon from '@material-ui/icons/FavoriteBorderSharp';
@@ -26,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
   pointer:{
     cursor:'pointer'
+  },
+  Avatar:{
+    width:30,
+    height:30
   }
 }));
 function Header(props) {
@@ -37,7 +40,7 @@ function Header(props) {
     <div>
       <AppBar className={classes.AppBar} >
         <Toolbar>
-                <Grid item xs={1} sm={1} onClick={home} className={classes.pointer}>
+                <Grid item xs={12} sm={1} onClick={home} className={classes.pointer}>
                 <CardMedia
                  component="img"
                  image="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
@@ -67,25 +70,23 @@ function Header(props) {
               }}
             />
           </Typography>
+          <NavLink to="/home" className="list-group-item"> <IconButton><HomeIcon /></IconButton> </NavLink>
+          <NavLink to="/direct/inbox" className="list-group-item "> <IconButton><NearMeSharpIcon/></IconButton> </NavLink>
+          <NavLink to="/explore" className="list-group-item "> <IconButton><ExploreIcon /></IconButton> </NavLink>
+          <NavLink to="/ghghhgg" className="list-group-item "> <IconButton><FavoriteBorderSharpIcon/></IconButton> </NavLink>
+          <NavLink to="/me" className="list-group-item ">
           <IconButton>
-            <HomeIcon />
-          </IconButton>
-          <IconButton>
-              <NearMeSharpIcon/>
-          </IconButton>
-          <IconButton>
-            <ExploreIcon />
-          </IconButton>
-          <IconButton>
-              <FavoriteBorderSharpIcon/>
-          </IconButton>
-          <IconButton>
-            <PhotoCameraIcon />
-          </IconButton>
+          <Avatar
+              className={classes.Avatar}
+              alt="Remy Sharp"
+              src="https://i.pinimg.com/originals/db/15/eb/db15eb36d6e9080764049f0eb6640198.png"
+            />
+            </IconButton>
+           </NavLink>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default withRouter(Header);
+export default Header;
