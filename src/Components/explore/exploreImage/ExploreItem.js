@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { Typography} from "@material-ui/core";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import { connect } from 'react-redux'
 const useStyles = makeStyles({
   
   second:{
@@ -21,19 +22,10 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ExploreItem(props) {
+function ExploreItem(props) {
   const classes = useStyles();
-  const [state,setState] = React.useState({
-       hover: false
-  });
-  const Hover= () =>{
-      setState({...state,hover:true});
-  }
-  const NoHover= () =>{
-       setState({...state,hover:false})
-  }
   const show = ()=>{
-    if(state.hover===true){
+    if(props.statusHover.status===true){
       return(
         <Typography className={classes.second}  component={'span'} variant={'body2'} >
         <FavoriteBorderIcon/> {props.favB}
@@ -43,17 +35,29 @@ export default function ExploreItem(props) {
     }
   }
   return (
-          <Card >
+          <Card onMouseOver={props.hoverStatus}
+          onMouseOut={props.hoverStatus} >
             <CardActionArea>
               <CardMedia
                 component="img"
-                alt="Contemplative Reptile"
                 image={props.image}
-                onMouseOver={Hover}
-                onMouseOut={NoHover}
+                
               />
             </CardActionArea>
                {show()}
           </Card>
   );
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+      statusHover: state.hoverStatusReducer
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+      hoverStatus: () => {
+          dispatch({type:'HOVER'})
+      }
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ExploreItem)
