@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,9 +11,6 @@ import { Card, Typography, Divider, ListItem, ListItemText } from "@material-ui/
 import FacebookIcon from "@material-ui/icons/Facebook";
 import Logo from "./Logo";
 import Download from "./Download";
-var login = () => {
-  return <Redirect to="/about" />;
-};
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
@@ -60,9 +57,27 @@ const useStyles = makeStyles((theme) => ({
 
 function Login(props) {
   const classes = useStyles();
-  const CheckLogin = () => {
-    props.history.push("/home");
-  };
+  // const CheckLogin = () => {
+  //   props.history.push("/home");
+  // };
+  const [state,setState]= React.useState({
+    user:'',
+    password:''
+  })
+  const login = (event)=>{
+      event.preventDefault();
+      if(state.user !== '' && state.password !== ''){
+        console.log('ok')
+      }
+      else{
+        console.log('fails')
+      }
+  }
+  const onHandelChange=(event)=>{
+    setState({
+      ...state,
+      [event.target.name] : event.target.value});    
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -81,6 +96,7 @@ function Login(props) {
               autoComplete="off"
               autoFocus
               size="small"
+              onChange={onHandelChange}
             />
             <TextField
               className={classes.input}
@@ -94,6 +110,7 @@ function Login(props) {
               id="password"
               autoComplete="current-password"
               size="small"
+              onChange={onHandelChange}
             />
             <Button
               type="submit"
@@ -101,7 +118,6 @@ function Login(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={CheckLogin}
             >
               Log In
             </Button>

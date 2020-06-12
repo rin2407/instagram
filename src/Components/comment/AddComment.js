@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Comments"
+        placeholder=""
         inputProps={{ 'aria-label': 'comments' }}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
