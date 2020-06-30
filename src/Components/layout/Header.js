@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 40,
     paddingRight: 40,
   },
-  input:{
+  search:{
     marginTop:4,
     marginBottom:4
   },
@@ -52,7 +52,7 @@ function Header(props) {
             className={classes.titleHeader}
           >
             <TextField
-              className={classes.input}
+              className={classes.search}
               variant="outlined"
               margin="normal"
               required

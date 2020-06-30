@@ -40,12 +40,12 @@
   }
 }
 @media (max-width: 425px) {
-  .makeStyles-input-3 {
+  /* .makeStyles-input-3 {
     display: none !important;
 }
 .MuiFormControl-marginNormal {
   display: none !important;
-}
+} */
 .makeStyles-root-1 {
   margin-top: 40px !important;
 }
