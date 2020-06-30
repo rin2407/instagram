@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,9 +11,7 @@ import { Card, Typography } from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import Logo from "./Logo";
 import Download from "./Download";
-var login = () => {
-  return <Redirect to="/about" />;
-};
+import callApi from '../../callApi/CallerApi'
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
@@ -68,8 +66,28 @@ const useStyles = makeStyles((theme) => ({
 
 function Register(props) {
   const classes = useStyles();
-  const CheckLogin = () => {
-    props.history.push("/home");
+  const [state,setState]= React.useState({
+    phone:'',
+    fullName:'',
+    userName:'',
+    password:'',
+    confirmPassword:''
+  })
+  const handleChange =(event)=>{
+    setState({
+      ...state,
+      [event.target.name] : event.target.value});    
+  }
+  const handleRegister = () => {
+    const user={
+      fullName: state.fullName,
+      userName: state.userName,
+      phone: state.phone,
+      password: state.password
+    }
+    callApi('users','POST',{user}).then(res => {
+      console.log(res.data.user)
+    })
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -94,19 +112,7 @@ function Register(props) {
               Log in with Facebook
             </Button>
           </Grid>
-          <form className={classes.form} noValidate onSubmit={login}>
-            <TextField
-              className={classes.input}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="Mobile number or email"
-              name="phone"
-              autoComplete="off"
-              autoFocus
-              size="small"
-            />
+          <div className={classes.form}>
             <TextField
               className={classes.input}
               variant="outlined"
@@ -116,6 +122,7 @@ function Register(props) {
               name="fullName"
               label="Full name"
               size="small"
+              onChange={handleChange }
             />
             <TextField
               className={classes.input}
@@ -126,6 +133,20 @@ function Register(props) {
               name="userName"
               label="User name"
               size="small"
+              onChange={handleChange }
+            />
+             <TextField
+              className={classes.input}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Mobile number or email"
+              name="phone"
+              autoComplete="off"
+              autoFocus
+              size="small"
+              onChange={handleChange }
             />
             <TextField
               className={classes.input}
@@ -136,9 +157,9 @@ function Register(props) {
               name="password"
               label="Password"
               type="password"
-              id="password"
               autoComplete="current-password"
               size="small"
+              onChange={handleChange }
             />
             <TextField
               className={classes.input}
@@ -149,9 +170,9 @@ function Register(props) {
               name="confirmPassword"
               label="Confirm password"
               type="password"
-              id="password"
               autoComplete="current-password"
               size="small"
+              onChange={handleChange }
             />
             <Button
               type="submit"
@@ -159,11 +180,11 @@ function Register(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={CheckLogin}
+              onClick={handleRegister}
             >
               Sign up
             </Button>
-          </form>
+          </div>
         </Card>
         <Card className={classes.root}>
           <Typography className={classes.sign}>

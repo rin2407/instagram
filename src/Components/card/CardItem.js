@@ -17,6 +17,9 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import { Divider } from "@material-ui/core";
 import Comment from '../card/Comment'
+import DialogFun from '../home/Dialog'
+import { connect } from 'react-redux'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -58,10 +61,10 @@ const useStyles = makeStyles((theme) => ({
 },
 header:{
   fontSize:'1rem'
-}
+},
 }));
 
-export default function CardItem(props) {
+ function CardItem(props) {
   const classes = useStyles();
   return (
     <div>
@@ -75,7 +78,7 @@ export default function CardItem(props) {
           />
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={props.handleStatusDialog}>
             <MoreHorizIcon />
           </IconButton>
         }
@@ -105,6 +108,20 @@ export default function CardItem(props) {
         <Divider/>
             <Comment/>
     </Card>
+    <DialogFun />
     </div>
   );
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+      dialogStatus: state.dialogStatus
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+      handleStatusDialog: () => {
+          dispatch({type:'DIALOG'})
+      }
+  }
+}
+export default  connect(mapStateToProps, mapDispatchToProps )(CardItem)

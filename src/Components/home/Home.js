@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     backgroundColor:'rgba(0, 0, 0, 0.87)',
     width: '100%'
-  }
+  },
 }));
 function Home(props) {
   var classes = useStyles();

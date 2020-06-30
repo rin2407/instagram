@@ -11,6 +11,7 @@ import { Card, Typography, Divider, ListItem, ListItemText } from "@material-ui/
 import FacebookIcon from "@material-ui/icons/Facebook";
 import Logo from "./Logo";
 import Download from "./Download";
+import callApi from '../../callApi/CallerApi'
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
@@ -57,26 +58,27 @@ const useStyles = makeStyles((theme) => ({
 
 function Login(props) {
   const classes = useStyles();
-  // const CheckLogin = () => {
-  //   props.history.push("/home");
-  // };
   const [state,setState]= React.useState({
-    user:'',
+    username:'',
     password:''
   })
-  const login = (event)=>{
-      event.preventDefault();
-      if(state.user !== '' && state.password !== ''){
-        console.log('ok')
-      }
-      else{
-        console.log('fails')
-      }
-  }
   const onHandelChange=(event)=>{
     setState({
       ...state,
-      [event.target.name] : event.target.value});    
+      [event.target.name] : event.target.value,
+    });    
+  }
+  const handleLogin= async ()=>{
+    const user={
+      username: state.username,
+      password: state.password
+    }
+    await callApi('users','POST',{user}).then(res => {
+      console.log(res.data)
+    })
+      //  console.log(state.username);
+      //  console.log(state.password);
+       props.history.push("/home");
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -84,7 +86,7 @@ function Login(props) {
       <div className={classes.paper}>
         <Card>
           <Logo />
-          <form className={classes.form} noValidate onSubmit={login}>
+          <div className={classes.form}>
             <TextField
               className={classes.input}
               variant="outlined"
@@ -92,10 +94,11 @@ function Login(props) {
               required
               fullWidth
               label="Phone number,username or email"
-              name="user"
+              name="username"
               autoComplete="off"
               autoFocus
               size="small"
+              fontSize="10px"
               onChange={onHandelChange}
             />
             <TextField
@@ -118,6 +121,7 @@ function Login(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleLogin}
             >
               Log In
             </Button>
@@ -143,7 +147,7 @@ function Login(props) {
                 </Link>
               </Grid>
             </Grid>
-          </form>
+          </div>
         </Card>
         <Card className={classes.root}>
           <Typography className={classes.sign}>
